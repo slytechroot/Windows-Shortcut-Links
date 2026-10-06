@@ -5,6 +5,10 @@ LECmd for Analysis
 
 https://github.com/EricZimmerman/LECmd
 
+##################
+
+.\LECmd.exe -f "c:\Users\CS99\Desktop\malicious.lnk"
+
 #################
 
 $obj = New-object -comobject wscript.shell
